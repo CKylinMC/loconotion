@@ -8,9 +8,6 @@ certifi==2020.4.5.1 \
 chardet==3.0.4 \
     --hash=sha256:fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691 \
     --hash=sha256:84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae
-chromedriver-autoinstaller==0.2.0 \
-    --hash=sha256:e6aadc277f2c3a1d247541eecb60bfdeabb3250c56ad9998595420840d1c7f71 \
-    --hash=sha256:290a72a1e60e5d806ac0d7cc14bd6aa0746bf8e007899efca48b25eb239ea851
 colorama==0.4.3 \
     --hash=sha256:7d73d2a99753107a36ac6b455ee49046802e59d9d076ef8e47b61499fa29afff \
     --hash=sha256:e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1
