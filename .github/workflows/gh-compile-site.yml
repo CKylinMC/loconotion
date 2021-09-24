@@ -29,6 +29,10 @@ jobs:
       run: |
         python loconotion wfsk.toml
         ls -la
+    - name: Append build info
+      run: |
+        date +%s%3N > ./dist/wfsk/buildtime.txt
+        echo "$GITHUB_SHA" > ./dist/wfsk/buildsha.txt
     - name: Deploy to gh-pages
       uses: peaceiris/actions-gh-pages@v3.7.3  
       with:
