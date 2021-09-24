@@ -25,9 +25,9 @@
 			y: time.getFullYear(),
 			m: (time.getMonth()+1)>=10?time.getMonth()+1:"0"+(time.getMonth()+1),
 			d: time.getDate(),
-			h: (time.getHours()+1)>=10?time.getHours()+1:"0"+(time.getHours()+1),
-			mi: (time.getMinutes()+1)>=10?time.getMinutes()+1:"0"+(time.getMinutes()+1),
-			s: (time.getSeconds()+1)>=10?time.getSeconds()+1:"0"+(time.getSeconds()+1),
+			h: time.getHours()>=10?time.getHours():"0"+time.getHours(),
+			mi: time.getMinutes()>=10?time.getMinutes():"0"+time.getMinutes(),
+			s: time.getSeconds()>=10?time.getSeconds():"0"+time.getSeconds(),
 		};
 		info.innerHTML+= `当前镜像上次构建于 ${t.y}-${t.m}-${t.d} ${t.h}:${t.mi}:${t.s} @ ${sha}`;
 	}
