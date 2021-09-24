@@ -28,3 +28,4 @@ jobs:
     - name: Build site
       run: |
         python loconotion wfsk.toml
+        ls -la
