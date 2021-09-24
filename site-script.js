@@ -26,9 +26,9 @@
 			m: (time.getMonth()+1)>=10?time.getMonth()+1:"0"+(time.getMonth()+1),
 			d: time.getDate(),
 			h: (time.getHours()+1)>=10?time.getHours()+1:"0"+(time.getHours()+1),
-			m: (time.getMinutes()+1)>=10?time.getMinutes()+1:"0"+(time.getMinutes()+1),
+			mi: (time.getMinutes()+1)>=10?time.getMinutes()+1:"0"+(time.getMinutes()+1),
 			s: (time.getSeconds()+1)>=10?time.getSeconds()+1:"0"+(time.getSeconds()+1),
 		};
-		info.innerHTML+= `当前镜像上次构建于 ${t.y}-${t.m}-${t.d} ${t.h}:${t.m}:${t.s} @ ${sha}`;
+		info.innerHTML+= `当前镜像上次构建于 ${t.y}-${t.m}-${t.d} ${t.h}:${t.mi}:${t.s} @ ${sha}`;
 	}
 })()
