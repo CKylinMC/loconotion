@@ -724,7 +724,6 @@ input[type="number"].input-hide-arrows {
  * TODO: use something like linaria to automate this shenanigans.
 /* ==================================================================== */
 /** Conditional style when self is contentEditable */
-/** Conditional style when a content-editable root is editable */
 /*!*************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/client/css/react-datetime.css ***!
   \*************************************************************************************/
