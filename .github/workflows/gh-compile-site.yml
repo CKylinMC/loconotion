@@ -29,7 +29,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Build site
       run: |
-        python loconotion wfsk.toml
+        python loconotion wfsk.toml --clean
         ls -la
     - name: Append build info
       run: |
