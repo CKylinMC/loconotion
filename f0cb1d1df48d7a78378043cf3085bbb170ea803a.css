@@ -563,11 +563,8 @@ html.notion-front-page .notion-app-inner {
 /* ==================================================================== */
 /* Contenteditable placeholders.
 /* ==================================================================== */
-[placeholder][contenteditable]:empty:after, [placeholder].forcePlaceholder:after {
+[contenteditable]:empty:after, .forcePlaceholder:after {
     content: attr(placeholder)
-    }
-[data-content-editable-selecting="true"] [placeholder][contenteditable]:empty:after, [data-content-editable-selecting="true"] [placeholder].forcePlaceholder:after {
-    content: " "
     }
 /* ==================================================================== */
 /* Intercom.
@@ -727,7 +724,7 @@ input[type="number"].input-hide-arrows {
  * TODO: use something like linaria to automate this shenanigans.
 /* ==================================================================== */
 /** Conditional style when self is contentEditable */
-/** Conditional style when an element is inside a contentEditable that has an expanded selection. */
+/** Conditional style when a content-editable root is editable */
 /*!*************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/client/css/react-datetime.css ***!
   \*************************************************************************************/
