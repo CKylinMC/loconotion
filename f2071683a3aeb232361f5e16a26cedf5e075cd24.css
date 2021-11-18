@@ -725,6 +725,7 @@ input[type="number"].input-hide-arrows {
 /* ==================================================================== */
 /** Conditional style when self is contentEditable */
 /** Conditional style when a content-editable root is editable */
+/** Conditional style when an element is or is inside a focused contentEditable. */
 /*!*************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/client/css/react-datetime.css ***!
   \*************************************************************************************/
