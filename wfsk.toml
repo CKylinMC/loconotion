@@ -121,6 +121,12 @@ theme = "dark"
   [pages.7e0a8e7062c947cebc347460c134c64f]
     slug = "share-tutroial"
 
+  [pages.4c5c13c35ec447fca3ff9444cfa84ded]
+    slug = "shares"
+
+  [pages.dbe91c332c6b4caba6e8788ced01b0d5]
+    slug = "contribute"
+
   [pages.7bb413b1248647e9a80d1f1b08f75bc3]
     slug = "share-ideas"
 
