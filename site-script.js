@@ -58,28 +58,42 @@
 	fetch("buildtime.txt").then(r=>r.text()).then(r=>showBuildInfo("t",r));
 	fetch("buildsha.txt").then(r=>r.text()).then(r=>showBuildInfo("s",r));
 	const loadCommentsInto = (el)=>{
-		const cmt = document.createElement("script");
-		const params = {
-			data_repo: "CKylinMC/loconotion",
-			data_repo_id: "R_kgDOGG2_Cg",
-			data_category: "General",
-			data_category_id: "DIC_kwDOGG2_Cs4CAOdx",
-			data_mapping: "pathname",
-			data_reactions_enabled: "1",
-			data_emit_metadata: "0",
-			data_theme: "transparent_dark",
-			data_lang: "zh-CN",
-			crossorigin: "anonymous"
-		};
-		for(let pn of Object.keys(params)){
-			cmt.setAttribute(pn.replace("_","-").replace("_","-"),params[pn]);
+		const cmt = document.createElement("div");
+		const cmtstyle = document.createElement("style");
+		cmtstyle.innerHTML = `
+		:root{
+			--waline-border: 1px solid #6666664f;
+			--waline-bgcolor: #2f3437;
+			--waline-bgcolor-light: #282c2e;
+			--waline-border-color: #333;
+		}
+		.vpower{
+			opacity: 0;
+		}
+		`;
+		cmt.appendChild(cmtstyle);
+		const cmtcontainer = document.createElement("div");
+		cmtcontainer.id = "waline";
+		cmt.style.width = "100%";
+		cmt.style.minWidth = "300px";
+		cmt.style.maxWidth = "800px";
+		cmt.style.margin = "0 auto";
+		cmt.appendChild(cmtcontainer);
+		const script = document.createElement("script");
+		script.src = "//cdn.jsdelivr.net/npm/@waline/client";
+		cmt.appendChild(script);
+		script.onload = ()=>{
+			Waline({
+			  el: '#waline',
+			  serverURL: 'https://comment.ckylin.site',
+			  dark: '#notion-app>div.notion-dark-theme'
+			});
 		}
 		if(!el){
 			(document.querySelector("#wfsk-buildinfo").parentElement).insertBefore(cmt,document.querySelector("#wfsk-buildinfo"));
 		}else{
 			el.appendChild(cmt);
 		}
-		cmt.src = "https://giscus.app/client.js";
 	}
 	function debounce(func, timeout = 300){
 	  let timer;
