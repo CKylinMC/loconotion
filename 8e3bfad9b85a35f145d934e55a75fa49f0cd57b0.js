@@ -55,5 +55,62 @@
 	}
 	fetch("buildtime.txt").then(r=>r.text()).then(r=>showBuildInfo("t",r));
 	fetch("buildsha.txt").then(r=>r.text()).then(r=>showBuildInfo("s",r));
+	const loadCommentsInto = (el)=>{
+		const cmt = document.createElement("script");
+		const params = {
+			data_repo: "CKylinMC/loconotion",
+			data_repo_id: "R_kgDOGG2_Cg",
+			data_category: "General",
+			data_category_id: "DIC_kwDOGG2_Cs4CAOdx",
+			data_mapping: "pathname",
+			data_reactions_enabled: "1",
+			data_emit_metadata: "0",
+			data_theme: "transparent_dark",
+			data_lang: "zh-CN",
+			crossorigin: "anonymous"
+		};
+		for(let pn of Object.keys(params)){
+			cmt.setAttribute(pn.replace("_","-").replace("_","-"),params[pn]);
+		}
+		if(!el){
+			(document.querySelector("#wfsk-buildinfo").parentElement).insertBefore(cmt,document.querySelector("#wfsk-buildinfo"));
+		}else{
+			el.appendChild(cmt);
+		}
+		cmt.src = "https://giscus.app/client.js";
+	}
+	function debounce(func, timeout = 300){
+	  let timer;
+	  return (...args) => {
+		clearTimeout(timer);
+		timer = setTimeout(() => { func.apply(this, args); }, timeout);
+	  };
+	}
+	function isElementInViewport (el) {
+		var rect = el.getBoundingClientRect();
+		return (
+			rect.top >= 0 &&
+			rect.left >= 0 &&
+			rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /* or $(window).height() */
+			rect.right <= (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */
+		);
+	}
+	const regScrollCommentLoader = ()=>{
+		window.jsLoaded = false;
+		const scroller = document.querySelector(".notion-scroller");
+		const bif = document.querySelector("#wfsk-buildinfo");
+		if(!scroller) return;
+		const scrollfn = debounce(()=>{
+			if(window.jsLoaded) return;
+			if(isElementInViewport(bif)){
+				window.jsLoaded = true;
+				scroller.removeEventListener("scroll", scrollfn);
+				loadCommentsInto();
+			}
+		})
+		scroller.addEventListener("scroll", scrollfn);
+		scrollfn();
+	}
+	regScrollCommentLoader();
 })()
 
