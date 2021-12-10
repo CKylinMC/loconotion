@@ -50,7 +50,9 @@
 		case "/shadowkylin.html":{
 			if((new URL(location.href)).searchParams.get("i")!==null) location.href = "#:~:text=%E5%A6%82%E6%9E%9C%E6%82%A8%E5%88%9D%E6%9D%A5%E4%B9%8D%E5%88%B0%EF%BC%8C%E8%AF%B7%E5%AE%B9%E6%88%91%E5%90%91%E6%82%A8%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8BSK%E6%B0%8F%E6%97%8F~";
 			if((new URL(location.href)).searchParams.get("q")!==null) location.href = "#:~:text=818581951";
-			history.replaceState('',{},location.pathname);
+			let giscus = "";
+			if((new URL(location.href)).searchParams.get("giscus")!==null) giscus = "?giscus="+(new URL(location.href)).searchParams.get("giscus");
+			history.replaceState('',{},location.pathname+giscus);
 		}break;
 	}
 	fetch("buildtime.txt").then(r=>r.text()).then(r=>showBuildInfo("t",r));
