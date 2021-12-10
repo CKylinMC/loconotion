@@ -2,6 +2,9 @@
 	const old = document.querySelector("#wfsk-buildinfo");
 	if(old) old.remove();
 	delete old;
+	if(location.pathname==="/shadowkylin.html"){
+		history.replaceState('',{},location.href.replace("/shadowkylin.html","/"))
+	}
 	const info = document.createElement("div");
 	info.id = "wfsk-buildinfo";
 	const body = document.querySelector(".notion-page-content");
