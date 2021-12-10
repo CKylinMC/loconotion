@@ -109,6 +109,7 @@
 			}
 		})
 		scroller.addEventListener("scroll", scrollfn);
+		scrollfn();
 	}
 	regScrollCommentLoader();
 })()
