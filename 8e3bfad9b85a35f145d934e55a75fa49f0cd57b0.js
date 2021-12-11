@@ -1,10 +1,20 @@
+/**
+ * site-script.js
+ * @ver 1.2
+ * @author CKylinMC
+ * Sideload script for WFSK mirror site.
+ */
+
 (function(){
-	const old = document.querySelector("#wfsk-buildinfo");
-	if(old) old.remove();
-	delete old;
+	/* Index Path Fix */
 	if(location.pathname==="/shadowkylin.html"){
 		history.replaceState('',{},location.href.replace("/shadowkylin.html","/"))
 	}
+	
+	/* Footer Injecter - Init */
+	const old = document.querySelector("#wfsk-buildinfo");
+	if(old) old.remove();
+	delete old;
 	const info = document.createElement("div");
 	info.id = "wfsk-buildinfo";
 	const body = document.querySelector(".notion-page-content");
@@ -21,15 +31,21 @@
 	info.appendChild(isp);
 	info.innerHTML+= `<br><span onclick="location.href='/site.html'">[切换站点]</span><br><span id="busuanzi_container_site_pv">镜像站访问量<span id="busuanzi_value_site_pv">-</span>次</span><script async src="">
 </script>`;
+	
+	/* Footer Injecter - ViewCounter */
 	const bsz = document.createElement("script");
 	bsz.setAttribute("async","");
 	bsz.src = "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js";
 	info.appendChild(bsz);
-	const targetImg = document.querySelector('img[src="793d36913121f91322d98e21024da07f9da05043.svg"]');
+	const targetImg = document.querySelector('img[src="793d36913121f91322d98e21024da07f9da05043.svg"]');/* Block original counter */
 	if(targetImg) targetImg.style.display = "none";
+	
+	/* Footer Injecter - Title Replacer */
 	document.title=document.title.replace(" | 镜像站","")+" | 镜像站";
-	const buildinfo = {buildtime:"0",buildsha:"?"};
 	const pgtt=document.querySelector("meta[name='title']").content;if(document.title.indexOf(pgtt)===-1)if(document.title.toLowerCase()==="shadowkylin") document.title = pgtt;else document.title+=" | "+pgtt;
+	
+	/* Footer Injecter - BuildInfo */
+	const buildinfo = {buildtime:"0",buildsha:"?"};
 	const showBuildInfo = (type,resp)=>{
 		if(type==="t") buildinfo.buildtime = resp;
 		else if(type==="s") buildinfo.buildsha = resp;
@@ -47,6 +63,10 @@
 		let isp = info.querySelector("span#wfsk-buildinfo-span");
 		isp.innerHTML = `当前镜像上次构建于 ${t.y}-${t.m}-${t.d} ${t.h}:${t.mi}:${t.s} @ <span onclick="location.href='https://github.com/CKylinMC/loconotion/commit/${sha}'">${sha}</span>`;
 	}
+	fetch("buildtime.txt").then(r=>r.text()).then(r=>showBuildInfo("t",r));
+	fetch("buildsha.txt").then(r=>r.text()).then(r=>showBuildInfo("s",r));
+	
+	/* PageOptimizer */
 	switch(location.pathname){
 		case "/site.html":{document.body.innerHTML = document.body.innerHTML.replace("国内访问推荐","<b style='color:gray'>当前访问</b>")}break;
 		case "/":
@@ -58,8 +78,8 @@
 			history.replaceState('',{},location.pathname+giscus);
 		}break;
 	}
-	fetch("buildtime.txt").then(r=>r.text()).then(r=>showBuildInfo("t",r));
-	fetch("buildsha.txt").then(r=>r.text()).then(r=>showBuildInfo("s",r));
+	
+	/* Comments */
 	const loadCommentsInto = (el)=>{
 		const cmt = document.createElement("div");
 		const cmtstyle = document.createElement("style");
@@ -131,5 +151,8 @@
 		scrollfn();
 	}
 	regScrollCommentLoader();
+	
+	/* Screen Fix */
+	document.querySelector(".notion-scroller>div.notion-presence-container").previousElementSibling.lastElementChild.setAttribute("style","width:0!important");
 })()
 
