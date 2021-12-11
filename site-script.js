@@ -84,7 +84,7 @@
 		const cmt = document.createElement("div");
 		const cmtstyle = document.createElement("style");
 		cmtstyle.innerHTML = `
-		:root{
+		#waline{
 			--waline-border: 1px solid #6666664f;
 			--waline-bgcolor: #2f3437;
 			--waline-bgcolor-light: #282c2e;
