@@ -49,7 +49,7 @@
     isp.id = "wfsk-buildinfo-span"
     isp.innerHTML = "正在加载构建信息..."
     info.appendChild(isp);
-    info.innerHTML += `<br><img src="https://github.com/CKylinMC/loconotion/actions/workflows/gh-compile-site.yml/badge.svg" width="120"><br><span onclick="location.href='/site.html'">[切换站点]</span><br><span id="busuanzi_container_site_pv">镜像站访问量<span id="busuanzi_value_site_pv">-</span>次</span><script async src="">
+    info.innerHTML += `<br><img onclick="open('https://github.com/CKylinMC/loconotion/actions/workflows/gh-compile-site.yml')" src="https://github.com/CKylinMC/loconotion/actions/workflows/gh-compile-site.yml/badge.svg" width="120"><br><span onclick="location.href='/site.html'">[切换站点]</span><br><span id="busuanzi_container_site_pv">镜像站访问量<span id="busuanzi_value_site_pv">-</span>次</span><script async src="">
 </script>`;
 
     /* Footer Injecter - ViewCounter */
