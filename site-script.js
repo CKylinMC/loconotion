@@ -6,6 +6,23 @@
  */
 
 (function () {
+    /* Show Something Cooooool */
+    (()=>{
+        const consoleOpts = [
+            "background:black;color:white;font-weight:bold;font-family:consolas,Arial,sans-serif;text-shadow:0 0 3px white;font-size: xx-large",
+            "background:gray;color:black;font-weight:bold;font-family:consolas,Arial,sans-serif;text-shadow:0 0 3px red;font-size: xx-large",
+            "background:transparent;color:#2196f3;font-weight:thin;font-family:consolas,Arial,sans-serif",
+            "background: transparent;color:black;font-weight:bold;font-family:consolas,Arial,sans-serif;text-shadow:0 0 3px white",
+            "background: transparent;color:#ff9800;font-weight:bold;font-family:consolas,Arial,sans-serif;font-size: large",
+        ];
+        const strs = "IF9fX18gIF8gICAgICAgICAgICAgICBfICAgICAgICAgICAgICAgXyAgX18gICAgIF8gXyAgICAgICA=.LyBfX198fCB8X18gICBfXyBfICBfX3wgfCBfX19fXyAgICAgIF98IHwvIC8gICBffCAoXylfIF9fICA=.XF9fXyBcfCAnXyBcIC8gX2AgfC8gX2AgfC8gXyBcIFwgL1wgLyAvICcgLyB8IHwgfCB8IHwgJ18gXCA=.IF9fXykgfCB8IHwgfCAoX3wgfCAoX3wgfCAoXykgXCBWICBWIC98IC4gXCB8X3wgfCB8IHwgfCB8IHw=.fF9fX18vfF98IHxffFxfXyxffFxfXyxffFxfX18vIFxfL1xfLyB8X3xcX1xfXywgfF98X3xffCB8X3w=.ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHxfX18vICAgICAgICAgICA=".split(".");
+        for(let str of strs) console.log(atob(str));
+        console.log(
+            "%c ShadowKylin %c 暗影麒麟 %c  镜像站点%c\nQQ 群: %c818581951",
+            ...consoleOpts
+        );
+    })();
+
     /* Index Path Fix */
     if (location.pathname === "/shadowkylin.html") {
         history.replaceState('', {}, location.href.replace("/shadowkylin.html", "/"))
