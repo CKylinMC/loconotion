@@ -153,6 +153,34 @@
 	regScrollCommentLoader();
 	
 	/* Screen Fix */
-	document.querySelector(".notion-scroller>div.notion-presence-container").previousElementSibling.lastElementChild.setAttribute("style","width:0!important");
+	(()=>{
+	const emptyBlankDiv = document.querySelector(".notion-scroller>div.notion-presence-container").previousElementSibling.lastElementChild;
+	if(emptyBlankDiv&&!emptyBlankDiv.classList.contains("notion-scroller")&&!emptyBlankDiv.classList.contains("notion-collection-view-body"))
+		emptyBlankDiv.setAttribute("style","width:0!important");
+	})()
+
+	/* Toggle List Fix (Reregister) */
+	(()=>{
+	const toggleButtons = document.getElementsByClassName("loconotion-toggle-button");
+	for (let i = 0; i < toggleButtons.length; i++) {
+	  const toggleButton = toggleButtons.item(i);
+	  const toggleId = toggleButton.getAttribute("loconotion-toggle-id");
+	  const toggleContent = document.querySelector(`.loconotion-toggle-content[loconotion-toggle-id='${toggleId}']`);
+	  const toggleArrow = toggleButton.querySelector("svg");
+	  if (toggleButton && toggleContent) {
+	    hideToggle(toggleContent, toggleArrow);
+	    const toggleButtonI = toggleButton.cloneNode(true);
+	    const toggleArrowI = toggleButtonI.querySelector("svg");
+	    toggleButton.replaceWith(toggleButtonI);
+	    toggleButtonI.addEventListener("click", () => {
+	      if (toggleContent.style.display == "none") {
+		showToggle(toggleContent, toggleArrowI);
+	      } else {
+		hideToggle(toggleContent, toggleArrowI);
+	      }
+	    });
+	  }
+	}
+	})()
 })()
 
