@@ -172,12 +172,12 @@
     }
     regScrollCommentLoader();
 
-    /* Screen Fix */
-    (() => {
-        const emptyBlankDiv = document.querySelector(".notion-scroller>div.notion-presence-container").previousElementSibling.lastElementChild;
-        if (emptyBlankDiv && !emptyBlankDiv.classList.contains("notion-scroller") && !emptyBlankDiv.classList.contains("notion-collection-view-body"))
-            emptyBlankDiv.setAttribute("style", "width:0!important");
-    })();
+    // /* Screen Fix */
+    // (() => {
+    //     const emptyBlankDiv = document.querySelector(".notion-scroller>div.notion-presence-container").previousElementSibling.lastElementChild;
+    //     if (emptyBlankDiv && !emptyBlankDiv.classList.contains("notion-scroller") && !emptyBlankDiv.classList.contains("notion-collection-view-body"))
+    //         emptyBlankDiv.setAttribute("style", "width:0!important");
+    // })();
 
     /* Toggle List Fix (Reregister) */
     (() => {
