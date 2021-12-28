@@ -627,7 +627,7 @@ class Parser:
 
             
         # exports the parsed page
-        html_str = str(soup)
+        html_str = "<!DOCTYPE html>"+str(soup)
         html_file = self.get_page_slug(url) if url != index else "index.html"
         if html_file in processed_pages.values():
             log.error(
