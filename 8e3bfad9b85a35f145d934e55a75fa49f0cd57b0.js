@@ -142,6 +142,9 @@
                     if ((new URL(location.href)).searchParams.get("giscus") !== null) giscus = "?giscus=" + (new URL(location.href)).searchParams.get("giscus");
                     history.replaceState('', {}, location.pathname + giscus);
                 } break;
+                case "/mirror-history":{
+                    log("This page still in development.");
+                } break;
             }
         },
 
