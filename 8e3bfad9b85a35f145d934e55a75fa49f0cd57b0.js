@@ -71,7 +71,7 @@
             info.style.zIndex = "999999";
             info.style.textAlign = "center";
             info.style.color = "#ffffff42";
-            info.innerHTML = "ShadowKylin &copy; 2021<br>ShadowKylin是游戏Warframe全球服中的游戏公会，我们使用WFSK作为我们的简称。<br>该氏族和站点由CKylinMC建立<br>";
+            info.innerHTML = "ShadowKylin &copy; 2022<br>ShadowKylin是游戏Warframe全球服中的游戏公会，我们使用WFSK作为我们的简称。<br>该氏族和站点由CKylinMC建立<br>";
             const isp = document.createElement("span");
             isp.id = "wfsk-buildinfo-span"
             isp.innerHTML = "正在加载构建信息..."
