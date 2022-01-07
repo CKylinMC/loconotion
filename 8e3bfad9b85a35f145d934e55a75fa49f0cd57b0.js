@@ -142,8 +142,132 @@
                     if ((new URL(location.href)).searchParams.get("giscus") !== null) giscus = "?giscus=" + (new URL(location.href)).searchParams.get("giscus");
                     history.replaceState('', {}, location.pathname + giscus);
                 } break;
-                case "/mirror-history":{
-                    log("This page still in development.");
+                case "/0ddf5fac6f424e9baf631751241b29db.html":
+                case "/buildinfos":
+                    {
+                        (async()=>{
+                            const targetEl = (function(){
+                                const matchedElement = [...document.querySelectorAll(".notion-page-content .notion-selectable.notion-text-block")].filter(line=>line.innerText.indexOf("此页面仅在镜像站点中可用。")>=0);
+                                if(matchedElement.length===0) return null;
+                                return matchedElement[0];
+                            })();
+                            if(targetEl===null) return log("Target element not found.");
+                            const crossJoin = (...arrs) => {
+                                const max = Math.max(...arrs.map(arr=>arr.length));
+                                let str = '';
+                                for(let i=0;i<max;i++){
+                                    for(let arr of arrs){
+                                        arr.length-1>=i && (str+=arr[i]);
+                                    }
+                                }
+                                return str;
+                            }
+                            const pad2 = n=>{
+                                return ('0'+n).slice(-2);
+                            }
+                            const fmtDate = date=>`${date.getYear()+1900}/${pad2(date.getMonth()+1)}/${pad2(date.getDate())} ${pad2(date.getHours())}:${pad2(date.getMinutes())}:${pad2(date.getSeconds())}`;
+                            const el = (strings,...args)=>{
+                                let strs = [...strings.raw];
+                                const first = strs.shift();
+                                if(first!='') {
+                                    strs = [first,...strs];
+                                    args = ['span',...args]
+                                }
+                                if(args.length===0)args.push('span');
+                                const dom = document.createElement(args.shift());
+                                dom.innerHTML = crossJoin(strs,args);
+                                return dom;
+                            }
+                            const dateDiff = (fromDate,toDate=new Date())=>{
+                                if(!(fromDate instanceof Date)) fromDate = new Date(fromDate);
+                                const diff = toDate-fromDate;
+                                const date = new Date(diff);
+                                const d = {
+                                    year: date.getYear()-70,
+                                    month: date.getMonth(),
+                                    date: date.getDate(),
+                                    hour: date.getHours(),
+                                    min: date.getMinutes(),
+                                    sec: date.getSeconds(),
+                                    ms: date.getMilliseconds()
+                                };
+                                let diffStr = '';
+                                if(d.year>0) diffStr+=d.year+"年前";
+                                else if(d.month>0) diffStr+=d.month+"个月前";
+                                else if(d.date>0&&d.date<=7) diffStr+=d.date+"天前";
+                                //else if(d.date>0&&d.date<=14) diffStr+="上个礼拜";
+                                else if(d.date>0) diffStr+=Math.floor(d.date/7)+"周前";
+                                else if(d.hour>0) diffStr+=d.hour+"小时前 ";
+                                else if(d.min>0) diffStr+=d.min+"分钟前";
+                                else if(d.sec>0) diffStr+="数秒前";
+                                else diffStr+="刚刚";
+                                return diffStr;
+                            }
+                            const timeDesc = (date)=>{
+                                if(!(date instanceof Date)) date = new Date(date);
+                                const hour = date.getHours();
+                                if(hour<=4||hour>=23) return "深夜";
+                                if(hour<10) return "清晨";
+                                if(hour<12) return "上午";
+                                if(hour<13) return "中午";
+                                if(hour<18) return "下午";
+                                if(hour<21) return "傍晚";
+                                if(hour<23) return "夜晚";
+                            }
+                            const addContent = (...items)=>{
+                                for(let item of items){
+                                    try{
+                                        if(item instanceof HTMLElement){
+                                            targetEl.appendChild(item);
+                                        }else if(typeof item === 'string' || str instanceof String){
+                                            targetEl.appendChild(document.createTextNode(item));
+                                        }else{
+                                            const preWrapper = (text)=>{
+                                                const pre = document.createElement("pre");
+                                                pre.appendChild(document.createTextNode(text));
+                                                return pre;
+                                            }
+                                            const directStr = item.toString();
+                                            if(directStr=="[object Object]"){
+                                                const jsonstr = JSON.stringify(item,null,2);
+                                                if(jsonstr=="{}"){
+                                                    targetEl.appendChild(preWrapper(item.__proto__.constructor.toString()));
+                                                }else{
+                                                    targetEl.appendChild(preWrapper(jsonstr));
+                                                }
+                                            }else{
+                                                targetEl.appendChild(preWrapper(directStr));
+                                            }
+                                        }
+                                    }catch(e){
+                                        targetEl.appendChild(document.createTextNode("显示数据时出现错误"));
+                                    }
+                                }
+                            }
+                            const setContent = (...items)=>{
+                                targetEl.innerHTML = "";
+                                addContent(...items);
+                            }
+                            setContent("正在读取内容...");
+                            try{
+                                const workerapi = "https://worker-api.ckylin.site?app=wfsk&limit=10";
+                                const resp = await fetch(workerapi,{headers:{"X-CKYLIN-APP":"getvercelbuilds"}});
+                                if(!resp.ok) return setContent("未能加载数据 - "+resp.status);
+                                const data = await resp.json();
+                                if(data.code!==0||data.app!="getvercelbuilds") return setContent("服务器出错",data);
+                                const infos = data.data;
+                                if(infos.length===0) return setContent("没有找到有效记录");
+                                setContent(el`${'h3'}最近10次构建记录`);
+                                const liststyle = ' style="list-style: none;padding-left: 25px"';
+                                const datestyle = ' style="font-size: small;font-weight: 100;color: gray;"';
+                                for(let info of infos){
+                                    addContent(el`${'div'}<h4 style="margin-bottom: 2px">${info.state==="READY"?"✔️".fontcolor("greenyellow"):"⚠️".fontcolor("yellow")} 构建时间: ${dateDiff(info.created)} <span${datestyle}>${fmtDate(new Date(info.created))} ${timeDesc(info.created)}</span></h4><li${liststyle}>状态: ${info.state}</li><li${liststyle}>构建SHA: ${info.build.substring(0,7)}</li><li${liststyle}>源更新: <pre style="display:inline">${info.source}</pre></li><li${liststyle}>地址: <a href="${info.url}" style="color:aqua!important">${info.url}</a></li>`)
+                                }
+                            }catch(e){
+                                log(e);
+                                setContent("加载时出现错误");
+                            }
+                        })();
                 } break;
             }
         },
