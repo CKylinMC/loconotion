@@ -132,3 +132,6 @@ theme = "dark"
 
   [pages.4e166df8983e4c58bae75c6ecdcd85a4]
     slug = "gallery"
+
+  [pages.0ddf5fac6f424e9baf631751241b29db]
+    slug = "buildinfos"
