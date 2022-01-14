@@ -143,7 +143,7 @@
                     history.replaceState('', {}, location.pathname + giscus);
                 } break;
                 case "/0ddf5fac6f424e9baf631751241b29db.html":
-                case "/buildinfos":
+                case "/buildinfos.html":
                     {
                         (async()=>{
                             const targetEl = (function(){
