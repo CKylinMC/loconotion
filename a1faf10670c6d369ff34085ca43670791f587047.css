@@ -717,7 +717,7 @@ input[type="number"].input-hide-arrows {
  * Use css variables to customize styles for pesudoselectors we
  * can't easily target from inline style properties.
  *
- * Each class defined below should be added to customizableClassnameHelpers.ts.
+ * Each class defined below should be added to CustomizableClasses in cssHelpers.ts.
  * For each CSS property, use var(`--${className}--${propertyName}`) as the value.
  *
  * We use camelCase names here so they're easier to write in Typescript.
@@ -726,6 +726,7 @@ input[type="number"].input-hide-arrows {
 /** Conditional style when self is contentEditable */
 /** Conditional style when a content-editable root is editable */
 /** Conditional style when an element is or is inside a focused contentEditable. */
+/** Conditional styles for :after when we are composing text */
 /*!*************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/client/css/react-datetime.css ***!
   \*************************************************************************************/
