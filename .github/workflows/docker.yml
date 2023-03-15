@@ -3,12 +3,12 @@ name: Docker Image
 on:
   push:
     branches:
-      - '**'
+      - 'upstream_**'
     tags:
       - 'v*.*.*'
   pull_request:
     branches:
-      - 'master'
+      - 'upstream_master'
 
 jobs:
   build-and-push-docker-image:
